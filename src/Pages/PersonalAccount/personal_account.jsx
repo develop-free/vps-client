@@ -48,7 +48,7 @@ const PersonalAccount = () => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   const calculateProgress = (points, currentLevel) => {
-    const pointsNeededForNextLevel = 100;
+    const pointsNeededForNextLevel = 50;
     const pointsInCurrentLevel = points % pointsNeededForNextLevel;
     return (pointsInCurrentLevel / pointsNeededForNextLevel) * 100;
   };
@@ -60,14 +60,14 @@ const PersonalAccount = () => {
       const avatarUrl = profileResponse.data?.avatar
         ? profileResponse.data.avatar.startsWith('http')
           ? profileResponse.data.avatar
-          : `/api${profileResponse.data.avatar}`
+          : `http://localhost:5000/api${profileResponse.data.avatar}`
         : null;
       setUserData({
         firstName: profileResponse.data?.first_name || 'Новый',
         lastName: profileResponse.data?.last_name || 'Пользователь',
         isNewUser: profileResponse.isNewUser || false,
         avatar: avatarUrl,
-        points: profileResponse.data?.points || 0,
+        points: profileResponse.data?.points || 45,
         level: profileResponse.data?.level || 1,
       });
     } catch (error) {
@@ -97,7 +97,7 @@ const PersonalAccount = () => {
     const avatarUrl = updatedData.avatar
       ? updatedData.avatar.startsWith('http')
         ? updatedData.avatar
-        : `/api${updatedData.avatar}`
+        : `http://localhost:5000/api${updatedData.avatar}`
       : null;
     setUserData((prev) => ({
       ...prev,
